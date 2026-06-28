@@ -2,7 +2,7 @@ import { db } from './index.ts';
 import { users, roles } from './schema.ts';
 import { eq } from 'drizzle-orm';
 
-export async function getOrCreateUser(uid: string, email: string, name: string) {
+export async function getOrCreateUser(uid: string, email: string, name: string, retries = 3): Promise<any> {
   try {
     // 1. Check if user already exists (performance-friendly)
     const existing = await db.select().from(users).where(eq(users.uid, uid));
@@ -43,8 +43,15 @@ export async function getOrCreateUser(uid: string, email: string, name: string) 
       .returning();
 
     return result[0];
-  } catch (error) {
-    console.error('Error in getOrCreateUser:', error);
+  } catch (error: any) {
+    console.error('Error in getOrCreateUser:', error.message);
+    if (retries > 0 && (error.message.includes('Connection terminated') || error.message.includes('server closed the connection'))) {
+      console.log(`Retrying getOrCreateUser... (${retries} attempts left)`);
+      // Wait a short delay before retrying to allow the database connection to re-establish
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return getOrCreateUser(uid, email, name, retries - 1);
+    }
     throw new Error('Failed to synchronize user profile with database.', { cause: error });
   }
 }
+

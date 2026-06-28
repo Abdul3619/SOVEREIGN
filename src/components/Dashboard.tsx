@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { useAuth } from '../context/AuthContext.tsx';
 import { 
   BarChart as ReBarChart, Bar, AreaChart as ReAreaChart, Area, XAxis, YAxis, 
@@ -400,14 +401,18 @@ export const Dashboard: React.FC = () => {
   });
 
   return (
-    <div className="bg-[#0f1115] min-h-screen text-gray-200 flex">
+    <div className="bg-[#f5f2ed] min-h-screen text-[#1a1a1a] flex">
       
       {/* Sidebar Rail */}
-      <aside className="w-64 bg-[#12141c] border-r border-[#2d3139]/40 p-6 flex flex-col justify-between flex-shrink-0">
+      <motion.aside 
+        initial={{ x: -250 }}
+        animate={{ x: 0 }}
+        className="w-64 bg-white border-r border-[#d9d5ce] p-6 flex flex-col justify-between flex-shrink-0 shadow-sm"
+      >
         <div className="space-y-8">
           <div>
-            <span className="font-sans text-md font-bold tracking-widest text-[#c5a880] block uppercase">PMS Control Desk</span>
-            <span className="font-mono text-[9px] text-gray-400 block tracking-widest uppercase mt-0.5">Sovereign Grand</span>
+            <span className="font-serif text-xl font-bold tracking-tight text-[#1a1a1a] block">Sovereign Admin</span>
+            <span className="font-mono text-[9px] text-[#c5a059] block tracking-widest uppercase mt-0.5 font-semibold">Operational Hub</span>
           </div>
 
           <nav className="space-y-1.5">
@@ -422,28 +427,30 @@ export const Dashboard: React.FC = () => {
             ].map((tab) => {
               const Icon = tab.icon;
               return (
-                <button
+                <motion.button
+                  whileHover={{ x: 4 }}
+                  whileTap={{ scale: 0.98 }}
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold tracking-wide transition-colors text-left ${
                     activeTab === tab.id 
-                      ? 'bg-[#c5a880] text-[#0f1115] shadow-lg shadow-[#c5a880]/10' 
-                      : 'text-gray-400 hover:text-white hover:bg-[#191d26]'
+                      ? 'bg-[#c5a059] text-white shadow-md shadow-[#c5a059]/20' 
+                      : 'text-gray-500 hover:text-black hover:bg-gray-50'
                   }`}
                 >
                   <Icon className="h-4 w-4" />
                   {tab.label}
-                </button>
+                </motion.button>
               );
             })}
           </nav>
         </div>
 
-        <div className="border-t border-[#2d3139]/30 pt-4 text-[10px] text-gray-500 font-mono">
+        <div className="border-t border-[#d9d5ce] pt-4 text-[10px] text-gray-500 font-mono">
           <span>Signed in as Admin:</span>
-          <span className="text-gray-300 block font-sans font-medium mt-1 truncate">{dbUser?.name}</span>
+          <span className="text-[#1a1a1a] block font-sans font-semibold mt-1 truncate">{dbUser?.name}</span>
         </div>
-      </aside>
+      </motion.aside>
 
       {/* Main Content Pane */}
       <main className="flex-1 p-8 overflow-y-auto max-h-screen">
@@ -458,29 +465,37 @@ export const Dashboard: React.FC = () => {
             
             {/* Tab 1: Overview Metrics & Analytics Charts */}
             {activeTab === 'metrics' && metrics && (
-              <div className="space-y-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-8"
+              >
                 <div>
-                  <h2 className="text-2xl font-bold font-sans text-white tracking-tight">PMS Executive Overview</h2>
-                  <p className="text-xs text-gray-400 mt-1">Real-time revenue, guest check-in occupancy, and sales analytics charts.</p>
+                  <h2 className="text-2xl font-bold font-serif text-[#1a1a1a] tracking-tight">PMS Executive Overview</h2>
+                  <p className="text-xs text-gray-500 mt-1">Real-time revenue, guest check-in occupancy, and sales analytics charts.</p>
                 </div>
 
                 {/* Metrics Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   {[
-                    { label: 'Cumulative Revenue', value: `$${(metrics.totalRevenue / 100).toLocaleString()}`, icon: DollarSign, color: 'text-emerald-400 bg-emerald-500/5 border-emerald-500/10' },
-                    { label: 'Occupancy Rate', value: `${metrics.occupancyRate}%`, icon: Percent, color: 'text-[#c5a880] bg-[#c5a880]/5 border-[#c5a880]/10' },
-                    { label: 'Pending Bookings', value: metrics.pendingBookings, icon: Clock, color: 'text-amber-500 bg-amber-500/5 border-amber-500/10' },
-                    { label: 'Total Guests', value: metrics.totalCustomers, icon: Users, color: 'text-blue-400 bg-blue-500/5 border-blue-500/10' },
+                    { label: 'Cumulative Revenue', value: `$${(metrics.totalRevenue / 100).toLocaleString()}`, icon: DollarSign, color: 'text-emerald-600 bg-emerald-50 border-emerald-200' },
+                    { label: 'Occupancy Rate', value: `${metrics.occupancyRate}%`, icon: Percent, color: 'text-[#c5a059] bg-[#c5a059]/10 border-[#c5a059]/20' },
+                    { label: 'Pending Bookings', value: metrics.pendingBookings, icon: Clock, color: 'text-amber-600 bg-amber-50 border-amber-200' },
+                    { label: 'Total Guests', value: metrics.totalCustomers, icon: Users, color: 'text-blue-600 bg-blue-50 border-blue-200' },
                   ].map((card, idx) => (
-                    <div key={idx} className={`border p-6 rounded-2xl flex items-center justify-between shadow-sm bg-[#12141c] ${card.color}`}>
+                    <motion.div 
+                      whileHover={{ y: -5 }}
+                      key={idx} 
+                      className={`border p-6 rounded-2xl flex items-center justify-between shadow-sm bg-white cursor-pointer ${card.color}`}
+                    >
                       <div>
-                        <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block">{card.label}</span>
-                        <span className="text-2xl font-bold font-sans mt-2 block text-gray-100">{card.value}</span>
+                        <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block">{card.label}</span>
+                        <span className="text-2xl font-bold font-sans mt-2 block text-[#1a1a1a]">{card.value}</span>
                       </div>
-                      <div className="p-3 bg-white/5 rounded-xl border border-white/5">
+                      <div className="p-3 bg-black/5 rounded-xl border border-black/5">
                         <card.icon className="h-5 w-5" />
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
@@ -533,7 +548,7 @@ export const Dashboard: React.FC = () => {
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             )}
 
             {/* Tab 2: Room & Categories PMS */}

@@ -127,27 +127,27 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute right-0 mt-3 w-80 bg-[#161920] border border-[#2d3139] rounded-xl shadow-2xl z-50 overflow-hidden"
+                        className="absolute right-0 mt-3 w-80 bg-white border border-[#d9d5ce] rounded-xl shadow-2xl z-50 overflow-hidden"
                       >
-                        <div className="p-4 border-b border-[#2d3139] flex justify-between items-center bg-[#1c212a]">
-                          <span className="text-xs font-semibold tracking-wider uppercase text-[#c5a880]">Notifications</span>
+                        <div className="p-4 border-b border-[#d9d5ce] flex justify-between items-center bg-gray-50">
+                          <span className="text-xs font-semibold tracking-wider uppercase text-[#c5a059]">Notifications</span>
                           <button 
                             onClick={triggerRefreshNotifications}
-                            className={`text-gray-400 hover:text-white transition-colors p-1 ${isRefreshing ? 'animate-spin' : ''}`}
+                            className={`text-gray-500 hover:text-black transition-colors p-1 ${isRefreshing ? 'animate-spin' : ''}`}
                           >
                             <RefreshCw className="h-3.5 w-3.5" />
                           </button>
                         </div>
-                        <div className="max-h-72 overflow-y-auto divide-y divide-[#2d3139]/40">
+                        <div className="max-h-72 overflow-y-auto divide-y divide-[#d9d5ce]">
                           {notifications.length === 0 ? (
                             <div className="p-8 text-center text-xs text-gray-500">No notifications yet.</div>
                           ) : (
                             notifications.map((n) => (
-                              <div key={n.id} className={`p-4 transition-colors ${n.isRead ? 'opacity-60 bg-transparent' : 'bg-[#c5a880]/5'}`}>
+                              <div key={n.id} className={`p-4 transition-colors ${n.isRead ? 'opacity-60 bg-transparent' : 'bg-[#c5a059]/10'}`}>
                                 <div className="flex items-start justify-between gap-2">
                                   <div>
-                                    <h5 className="text-xs font-semibold text-gray-200">{n.title}</h5>
-                                    <p className="text-[11px] text-gray-400 mt-1 leading-relaxed">{n.message}</p>
+                                    <h5 className="text-xs font-semibold text-[#1a1a1a]">{n.title}</h5>
+                                    <p className="text-[11px] text-gray-600 mt-1 leading-relaxed">{n.message}</p>
                                     <span className="font-mono text-[9px] text-gray-500 mt-1 block">
                                       {new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                     </span>
@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
                                   {!n.isRead && (
                                     <button 
                                       onClick={() => handleMarkAsRead(n.id)}
-                                      className="text-[#c5a880] hover:text-[#e6d5b8] p-0.5 bg-[#c5a880]/10 rounded"
+                                      className="text-[#c5a059] hover:text-[#b08e4a] p-0.5 bg-[#c5a059]/10 rounded"
                                     >
                                       <Check className="h-3 w-3" />
                                     </button>
@@ -177,19 +177,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
                       setShowUserMenu(!showUserMenu);
                       setShowNotifications(false);
                     }}
-                    className="flex items-center gap-2 bg-[#161920] border border-[#2d3139] px-3.5 py-1.5 rounded-lg hover:border-[#c5a880]/40 transition-colors"
+                    className="flex items-center gap-2 bg-gray-50 border border-[#d9d5ce] px-3.5 py-1.5 rounded-lg hover:border-[#c5a059]/40 transition-colors"
                     id="profile-dropdown-btn"
                   >
-                    <div className="h-6 w-6 rounded bg-[#c5a880]/20 flex items-center justify-center text-[#c5a880] font-bold text-xs">
+                    <div className="h-6 w-6 rounded bg-[#c5a059]/20 flex items-center justify-center text-[#c5a059] font-bold text-xs">
                       {dbUser.name[0].toUpperCase()}
                     </div>
                     <div className="text-left hidden lg:block">
-                      <span className="text-xs font-medium text-gray-200 block truncate max-w-[100px]">{dbUser.name}</span>
-                      <span className="font-mono text-[9px] text-[#c5a880] tracking-wider block">
+                      <span className="text-xs font-medium text-[#1a1a1a] block truncate max-w-[100px]">{dbUser.name}</span>
+                      <span className="font-mono text-[9px] text-[#c5a059] tracking-wider block">
                         {getRoleLabel(dbUser.role?.name || 'customer')}
                       </span>
                     </div>
-                    <ChevronDown className="h-3 w-3 text-gray-400" />
+                    <ChevronDown className="h-3 w-3 text-gray-500" />
                   </button>
 
                   <AnimatePresence>

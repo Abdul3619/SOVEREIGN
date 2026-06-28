@@ -27,7 +27,7 @@ function AppContent() {
     setLoading(true);
     try {
       // Load room categories
-      const catRes = await fetch('/api/categories');
+      const catRes = await fetch('/api/rooms');
       if (catRes.ok) {
         const catData = await catRes.json();
         setCategories(catData);

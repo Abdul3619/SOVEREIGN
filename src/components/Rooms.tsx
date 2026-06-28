@@ -31,16 +31,16 @@ export const Rooms: React.FC<RoomsProps> = ({ categories, onBookCategory }) => {
   };
 
   return (
-    <div className="bg-[#0a0c10] py-16">
+    <div className="bg-[#f5f2ed] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#c5a880] block mb-2">Bespoke Living</span>
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#c5a059] block mb-2">Bespoke Living</span>
           <h2 className="font-serif text-3xl sm:text-4xl font-light italic tracking-tight text-[#1a1a1a]">
             Palatial Suites & Secluded Sanctuary Villas
           </h2>
-          <p className="text-gray-400 text-sm mt-3 leading-relaxed">
+          <p className="text-gray-500 text-sm mt-3 leading-relaxed">
             Every suite is individually styled, utilizing timeless marble masonry, custom hand-carved millwork, and state-of-the-art residential comfort systems.
           </p>
         </div>
@@ -52,35 +52,37 @@ export const Rooms: React.FC<RoomsProps> = ({ categories, onBookCategory }) => {
               key={cat.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-[#12141c] border border-[#2d3139]/40 rounded-2xl overflow-hidden flex flex-col hover:border-[#c5a880]/30 transition-all group"
+              className="bg-white border border-[#d9d5ce] rounded-2xl overflow-hidden flex flex-col hover:border-[#c5a059]/50 hover:shadow-xl hover:shadow-[#c5a059]/10 transition-all group cursor-pointer"
+              onClick={() => onBookCategory(cat)}
             >
               {/* Image Gallery Header */}
               <div className="relative h-64 sm:h-80 overflow-hidden">
                 <img 
                   src={cat.images[0]} 
                   alt={cat.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                 />
                 
                 {/* Price Tag Overlay */}
-                <div className="absolute top-4 right-4 bg-[#0a0c10]/80 border border-[#c5a880]/30 backdrop-blur-md px-4 py-2 rounded-xl text-right">
-                  <span className="text-[10px] uppercase tracking-wider text-gray-400 block">From</span>
-                  <span className="text-lg font-bold text-[#c5a880] font-sans">
+                <div className="absolute top-4 right-4 bg-white/95 border border-[#d9d5ce] backdrop-blur-md px-4 py-2 rounded-xl text-right shadow-lg">
+                  <span className="text-[10px] uppercase tracking-wider text-gray-500 block font-semibold">From</span>
+                  <span className="text-lg font-bold text-[#1a1a1a] font-serif">
                     ${(cat.basePrice / 100).toLocaleString()}
                   </span>
-                  <span className="text-[10px] text-gray-400"> / night</span>
+                  <span className="text-[10px] text-gray-500 font-medium"> / night</span>
                 </div>
 
                 {/* Available Badge */}
                 <div className="absolute top-4 left-4">
                   {cat.availableCount > 0 ? (
-                    <span className="bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/25 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold backdrop-blur-md">
+                    <span className="bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/25 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold backdrop-blur-md">
                       {cat.availableCount} Available Suites
                     </span>
                   ) : (
-                    <span className="bg-red-500/15 text-red-400 border border-red-500/25 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold backdrop-blur-md">
+                    <span className="bg-red-500/15 text-red-500 border border-red-500/25 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold backdrop-blur-md">
                       Fully Booked
                     </span>
                   )}
@@ -91,35 +93,35 @@ export const Rooms: React.FC<RoomsProps> = ({ categories, onBookCategory }) => {
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#c5a880] font-bold">Category ID: #{cat.id}</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#c5a059] font-bold">Category ID: #{cat.id}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-100 font-sans group-hover:text-[#c5a880] transition-colors">
+                  <h3 className="text-xl font-bold text-[#1a1a1a] font-serif group-hover:text-[#c5a059] transition-colors">
                     {cat.name}
                   </h3>
-                  <p className="text-gray-400 text-xs mt-3 leading-relaxed min-h-[64px]">
+                  <p className="text-gray-500 text-xs mt-3 leading-relaxed min-h-[64px]">
                     {cat.description}
                   </p>
 
                   {/* Room metadata info */}
-                  <div className="flex items-center gap-6 mt-5 border-t border-b border-[#2d3139]/30 py-4">
+                  <div className="flex items-center gap-6 mt-5 border-t border-b border-[#d9d5ce] py-4">
                     <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-[#c5a880]" />
-                      <span className="text-xs text-gray-300">Up to {cat.capacity} Guests</span>
+                      <Users className="h-4 w-4 text-[#c5a059]" />
+                      <span className="text-xs text-gray-600 font-medium">Up to {cat.capacity} Guests</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-[#c5a880]" />
-                      <span className="text-xs text-gray-300">Bespoke Butler Care</span>
+                      <Sparkles className="h-4 w-4 text-[#c5a059]" />
+                      <span className="text-xs text-gray-600 font-medium">Bespoke Butler Care</span>
                     </div>
                   </div>
 
                   {/* Amenities Tags */}
                   <div className="mt-5">
-                    <span className="text-[10px] uppercase tracking-widest text-gray-500 block mb-2 font-semibold">Premium Features</span>
+                    <span className="text-[10px] uppercase tracking-widest text-gray-500 block mb-2 font-bold">Premium Features</span>
                     <div className="flex flex-wrap gap-2">
                       {cat.amenities.map((amen, idx) => (
                         <span 
                           key={idx} 
-                          className="inline-flex items-center gap-1.5 bg-[#1a1e27] text-gray-300 px-3 py-1.5 rounded-lg text-[10.5px] border border-[#2d3139]/20"
+                          className="inline-flex items-center gap-1.5 bg-[#f5f2ed] text-gray-700 px-3 py-1.5 rounded-lg text-[10.5px] border border-[#d9d5ce] font-medium"
                         >
                           {getFeatureIcon(amen)}
                           {amen}
@@ -130,15 +132,15 @@ export const Rooms: React.FC<RoomsProps> = ({ categories, onBookCategory }) => {
 
                   {/* Seasonal pricing dropdown display */}
                   {cat.seasonalPricing && Object.keys(cat.seasonalPricing).length > 0 && (
-                    <div className="mt-5 p-3.5 bg-[#191d26] border border-[#2d3139]/30 rounded-xl">
-                      <span className="text-[10px] uppercase tracking-wider text-[#c5a880] block font-bold mb-2">Seasonal Pricing Estimator</span>
-                      <div className="grid grid-cols-2 gap-2 divide-x divide-[#2d3139]/40">
+                    <div className="mt-5 p-3.5 bg-[#fcfbfa] border border-[#d9d5ce] rounded-xl">
+                      <span className="text-[10px] uppercase tracking-wider text-[#c5a059] block font-bold mb-2">Seasonal Pricing Estimator</span>
+                      <div className="grid grid-cols-2 gap-2 divide-x divide-[#d9d5ce]">
                         {Object.entries(cat.seasonalPricing).map(([key, val]) => {
                           const value = val as { label: string; rate: number };
                           return (
                             <div key={key} className="px-2">
-                              <span className="text-[10px] text-gray-400 block truncate">{value.label}</span>
-                              <span className="font-sans text-xs font-bold text-gray-200 mt-0.5 block">${(value.rate / 100).toLocaleString()}/n</span>
+                              <span className="text-[10px] text-gray-500 block truncate font-medium">{value.label}</span>
+                              <span className="font-sans text-xs font-bold text-[#1a1a1a] mt-0.5 block">${(value.rate / 100).toLocaleString()}/n</span>
                             </div>
                           );
                         })}

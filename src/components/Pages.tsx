@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { 
   Utensils, Wine, Shirt, Calendar, HeartPulse, Activity,
-  Phone, Mail, MapPin, Send, HelpCircle, ChevronRight, Clock
+  Phone, Mail, MapPin, Send, HelpCircle, ChevronRight, Clock,
+  ArrowRight
 } from 'lucide-react';
 import { Service, GalleryItem, CMSConfig } from '../types.ts';
 
@@ -26,57 +28,69 @@ export const ServicesView: React.FC = () => {
 
   const getServiceIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Utensils': return <Utensils className="h-6 w-6 text-[#c5a880]" />;
-      case 'Wine': return <Wine className="h-6 w-6 text-[#c5a880]" />;
-      case 'HeartPulse': return <HeartPulse className="h-6 w-6 text-[#c5a880]" />;
-      case 'Shirt': return <Shirt className="h-6 w-6 text-[#c5a880]" />;
-      case 'Calendar': return <Calendar className="h-6 w-6 text-[#c5a880]" />;
-      default: return <Activity className="h-6 w-6 text-[#c5a880]" />;
+      case 'Utensils': return <Utensils className="h-6 w-6 text-[#c5a059]" />;
+      case 'Wine': return <Wine className="h-6 w-6 text-[#c5a059]" />;
+      case 'HeartPulse': return <HeartPulse className="h-6 w-6 text-[#c5a059]" />;
+      case 'Shirt': return <Shirt className="h-6 w-6 text-[#c5a059]" />;
+      case 'Calendar': return <Calendar className="h-6 w-6 text-[#c5a059]" />;
+      default: return <Activity className="h-6 w-6 text-[#c5a059]" />;
     }
   };
 
   return (
-    <div className="bg-[#0a0c10] py-16">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="bg-[#f5f2ed] py-16 min-h-[90vh]"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#c5a880] block mb-2">Bespoke Guest Privileges</span>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white font-sans">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c5a059] block mb-2">Bespoke Guest Privileges</span>
+          <h2 className="text-3xl sm:text-4xl font-light italic tracking-tight text-[#1a1a1a] font-serif">
             Curated Services for Refined Living
           </h2>
-          <p className="text-gray-400 text-xs mt-3 leading-relaxed">
+          <p className="text-gray-500 text-sm mt-3 leading-relaxed">
             The Sovereign Grand goes beyond standard accommodations to provide tailored butler care, Michelin-starred gastronomy, and curative botanical therapies.
           </p>
-        </div>
+        </motion.div>
 
         {loading ? (
           <div className="text-center text-gray-500 font-mono text-xs">Loading premium guest features...</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesList.map((srv) => (
-              <div 
+            {servicesList.map((srv, idx) => (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
                 key={srv.id}
-                className="bg-[#12141c] border border-[#2d3139]/40 p-6 rounded-2xl flex flex-col justify-between hover:border-[#c5a880]/30 transition-all group"
+                whileHover={{ y: -5 }}
+                className="bg-white border border-[#d9d5ce] p-6 rounded-2xl flex flex-col justify-between hover:border-[#c5a059]/50 hover:shadow-xl hover:shadow-[#c5a059]/5 transition-all group cursor-pointer"
               >
                 <div>
-                  <div className="bg-[#1a1d26] p-3 rounded-xl border border-[#2d3139]/20 inline-block mb-5 group-hover:scale-105 transition-transform">
+                  <div className="bg-[#f5f2ed] p-3 rounded-xl border border-[#d9d5ce] inline-block mb-5 group-hover:scale-105 group-hover:bg-[#c5a059]/10 transition-transform">
                     {getServiceIcon(srv.icon)}
                   </div>
-                  <h3 className="text-lg font-bold text-gray-100 font-sans group-hover:text-[#c5a880] transition-colors">{srv.name}</h3>
-                  <p className="text-gray-400 text-xs mt-3 leading-relaxed">{srv.description}</p>
+                  <h3 className="text-lg font-bold text-[#1a1a1a] font-serif group-hover:text-[#c5a059] transition-colors">{srv.name}</h3>
+                  <p className="text-gray-500 text-xs mt-3 leading-relaxed">{srv.description}</p>
                 </div>
 
-                <div className="border-t border-[#2d3139]/20 pt-4 mt-6 flex justify-between items-center text-xs">
-                  <span className="text-gray-500 font-mono">ESTIMATED RATE</span>
-                  <span className="text-gray-200 font-semibold">
+                <div className="border-t border-[#d9d5ce] pt-4 mt-6 flex justify-between items-center text-xs">
+                  <span className="text-gray-500 font-mono text-[10px]">ESTIMATED RATE</span>
+                  <span className="text-[#1a1a1a] font-bold">
                     {srv.price > 0 ? `From $${(srv.price / 100).toLocaleString()}` : 'Complimentary'}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -104,14 +118,22 @@ export const GalleryView: React.FC = () => {
   const filteredItems = filter === 'all' ? galleryItems : galleryItems.filter(i => i.category === filter);
 
   return (
-    <div className="bg-[#0a0c10] py-16">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="bg-[#f5f2ed] py-16 min-h-[90vh]"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#c5a880] block mb-2">Visual Showcase</span>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white font-sans">
-            Captive Views of The Sovereign Grand
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c5a059] block mb-2">Visual Showcase</span>
+          <h2 className="text-3xl sm:text-4xl font-light italic tracking-tight text-[#1a1a1a] font-serif">
+            Captivating Views of The Sovereign
           </h2>
-        </div>
+        </motion.div>
 
         {/* Filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -122,49 +144,63 @@ export const GalleryView: React.FC = () => {
             { id: 'spa', label: 'Botanical Spa' },
             { id: 'exterior', label: 'Gardens & Pools' }
           ].map(btn => (
-            <button
+            <motion.button
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
               key={btn.id}
               onClick={() => setFilter(btn.id)}
               className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-colors ${
                 filter === btn.id 
-                  ? 'bg-[#c5a880] text-[#0f1115] shadow-lg shadow-[#c5a880]/10' 
-                  : 'text-gray-400 bg-[#12141c] hover:text-white border border-[#2d3139]/30'
+                  ? 'bg-[#c5a059] text-white shadow-lg shadow-[#c5a059]/20' 
+                  : 'text-gray-500 bg-white hover:text-black border border-[#d9d5ce]'
               }`}
             >
               {btn.label}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {loading ? (
           <div className="text-center text-gray-500 font-mono text-xs">Loading visual portfolio...</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => (
-              <div 
+          <motion.div 
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredItems.map((item, idx) => (
+              <motion.div 
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
                 key={item.id}
-                className="group relative h-72 rounded-2xl overflow-hidden border border-[#2d3139]/40 bg-[#12141c]"
+                className="group relative h-72 rounded-2xl overflow-hidden border border-[#d9d5ce] bg-white cursor-pointer shadow-sm hover:shadow-xl transition-shadow"
               >
                 <img 
                   src={item.url} 
                   alt={item.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                 />
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#c5a880] font-bold block mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    className="w-full"
+                  >
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#c5a059] font-bold block mb-1">
                       {item.category}
                     </span>
-                    <h4 className="text-sm font-bold text-white font-sans">{item.title}</h4>
-                  </div>
+                    <h4 className="text-sm font-semibold text-white font-serif">{item.title}</h4>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -12,13 +12,18 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ title, subtitle, onBookClick, setView }) => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#0a0c10] pt-12">
-      {/* Background image & gradient overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80" 
-          alt="Sovereign Luxury Hotel Lobby" 
-          className="w-full h-full object-cover object-center opacity-40 scale-105 select-none"
-        />
+      {/* Background video & gradient overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#0a0c10]">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover object-center opacity-50 select-none scale-105"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-hotel-room-with-a-double-bed-4180-large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-lobby-of-a-luxury-hotel-4184-large.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-[#0a0c10]/70 to-[#0a0c10]/40" />
       </div>
 
