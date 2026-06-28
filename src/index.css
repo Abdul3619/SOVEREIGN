@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Cormorant Garamond", "Playfair Display", "Didot", "Georgia", serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Force standard dark classes to map to the gorgeous light luxury linen theme */
+html, body {
+  background-color: #f5f2ed !important;
+  color: #1a1a1a !important;
+  font-family: var(--font-sans);
+}
+
+/* Core layouts */
+.bg-\[\#0a0c10\] {
+  background-color: #f5f2ed !important;
+}
+.bg-\[\#0f1115\] {
+  background-color: #eae5dc !important; /* Elegant alternating section */
+}
+.bg-\[\#12141c\], .bg-\[\#161920\], .bg-\[\#1c212a\], .bg-\[\#11131a\] {
+  background-color: #ffffff !important; /* Premium crisp white cards */
+}
+.bg-\[\#191d26\], .bg-\[\#20242d\], .bg-\[\#181a22\] {
+  background-color: #fcfbfa !important; /* Soft off-white internal inputs/containers */
+}
+
+/* Keep dark backgrounds for specific sections like hero or header overlay to ensure professional balance */
+.bg-gradient-to-t.from-\[\#0a0c10\].via-\[\#0a0c10\]\/70.to-\[\#0a0c10\]\/40 {
+  background-image: linear-gradient(to top, #1a1a1a, rgba(26,26,26,0.8), rgba(26,26,26,0.4)) !important;
+}
+
+/* Navigation overrides */
+.bg-\[\#0f1115\]\/90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid #d9d5ce !important;
+}
+
+/* Text overrides - map light gray text to charcoal/bronze */
+.text-gray-100, .text-gray-200 {
+  color: #1a1a1a !important;
+}
+.text-gray-300, .text-gray-400 {
+  color: #3a3a3a !important;
+}
+.text-gray-500 {
+  color: #6a655e !important;
+}
+
+/* Gold overrides */
+.text-\[\#c5a880\] {
+  color: #c5a059 !important;
+}
+.hover\:text-\[\#e6d5b8\]:hover {
+  color: #b08e4a !important;
+}
+.bg-\[\#c5a880\] {
+  background-color: #c5a059 !important;
+}
+.bg-\[\#c5a880\]\/10 {
+  background-color: rgba(197, 160, 89, 0.1) !important;
+}
+.bg-\[\#c5a880\]\/5 {
+  background-color: rgba(197, 160, 89, 0.05) !important;
+}
+.border-\[\#c5a880\]\/20 {
+  border-color: rgba(197, 160, 89, 0.2) !important;
+}
+.border-\[\#c5a880\]\/30 {
+  border-color: rgba(197, 160, 89, 0.3) !important;
+}
+.shadow-\[\#c5a880\]\/10 {
+  shadow-color: rgba(197, 160, 89, 0.1) !important;
+}
+
+/* Gradient overrides: map dark gold gradients to premium golden brand buttons */
+.bg-gradient-to-tr.from-\[\#c5a880\].to-\[\#e6d5b8\],
+.bg-gradient-to-r.from-\[\#c5a880\].to-\[\#e6d5b8\],
+.bg-gradient-to-br.from-\[\#c5a880\].to-\[\#e6d5b8\] {
+  background: linear-gradient(135deg, #c5a059 0%, #b08e4a 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Keep the dark text inside golden actions when gradient is applied */
+.bg-gradient-to-r.from-\[\#c5a880\].to-\[\#e6d5b8\] .text-\[\#0f1115\],
+.bg-gradient-to-tr.from-\[\#c5a880\].to-\[\#e6d5b8\],
+button.bg-gradient-to-r,
+a.bg-gradient-to-r {
+  color: #ffffff !important;
+}
+
+/* Borders */
+.border-\[\#2d3139\] {
+  border-color: #d9d5ce !important;
+}
+.border-\[\#2d3139\]\/20 {
+  border-color: rgba(217, 213, 206, 0.3) !important;
+}
+.border-\[\#2d3139\]\/30 {
+  border-color: rgba(217, 213, 206, 0.4) !important;
+}
+.border-\[\#2d3139\]\/40 {
+  border-color: rgba(217, 213, 206, 0.5) !important;
+}
+.border-\[\#2d3139\]\/50 {
+  border-color: rgba(217, 213, 206, 0.6) !important;
+}
+
+/* Custom styling for "Professional Polish" theme */
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+h1, h2, h3, .luxury-title {
+  font-family: var(--font-serif) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.luxury-badge {
+  background-color: rgba(197, 160, 89, 0.08) !important;
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+  color: #c5a059 !important;
+}
+
+/* Keep form input labels highly visible */
+label {
+  color: #2a2a2a !important;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(197, 160, 89, 0.2) !important;
+  color: #1a1a1a !important;
+}

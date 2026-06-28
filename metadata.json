@@ -1,0 +1,6 @@
+{
+  "name": "Sovereign Grand Hotel",
+  "description": "Bespoke modern luxury hotel management platform with custom CRM, PMS, direct direct settlement desk, staff directory, and modular analytics dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
