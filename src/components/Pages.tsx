@@ -509,6 +509,10 @@ export const FooterView: React.FC = () => {
         <span className="text-xs uppercase tracking-[0.2em] text-[#c5a880] block font-bold">THE SOVEREIGN GRAND ESTATE</span>
         <p className="max-w-md mx-auto text-[11px] text-gray-400">Blended marble architecture, Swiss protocol service care, and private Riviera sanctuaries designed for elite quiet travel.</p>
         <p className="pt-6 border-t border-[#2d3139]/10 text-[10px] text-gray-600 font-mono uppercase tracking-widest">&copy; 2026 Sovereign Grand Hotel & Spa Monaco. All Rights Reserved.</p>
+        <p className="text-[11px] text-gray-500">
+          Built by Abdulwahab Abdullahi ·{' '}
+          <a href="mailto:abdulwahababdullahi3619@gmail.com" className="text-[#c5a880] hover:underline">Contact the developer</a>
+        </p>
       </div>
     </footer>
   );
