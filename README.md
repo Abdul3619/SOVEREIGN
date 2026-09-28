@@ -1,20 +1,42 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Sovereign Grand Hotel
 
-# Run and deploy your AI Studio app
+I built this hotel website and management platform for a luxury hotel concept, the Sovereign Grand Hotel & Spa. Guests can browse rooms, suites and villas, book online, and manage their bookings, invoices and notifications from a guest portal. Staff get a dashboard covering rooms, categories, bookings (approve, reject, cancel), customers and payments, with access based on role (super admin, hotel manager, receptionist, accountant).
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/9746a728-c570-43c7-8c88-a0d77fe84283
+- React 19, Vite, Tailwind CSS 4, Motion
+- Express server (`server.ts`) serving the API and the built frontend
+- PostgreSQL (Cloud SQL or any Postgres) through Drizzle ORM (`src/db`)
+- Firebase Authentication with Google sign-in (`src/lib/firebase.ts`, verified on the server in `src/middleware/auth.ts`)
 
-## Run Locally
+## Running it locally
 
-**Prerequisites:**  Node.js
+You need Node.js, a PostgreSQL database and a Firebase project with Google sign-in enabled.
 
+```bash
+npm install
+cp .env.example .env   # fill in the database settings
+npm run dev            # http://localhost:3000
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+The Firebase web settings live in `firebase-config.json`. These values are public by design.
+
+On startup, the server creates sample data (rooms, services, gallery) if the database is empty. See `src/db/seed.ts`.
+
+| Variable | Purpose |
+| --- | --- |
+| `SQL_HOST`, `SQL_DB_NAME`, `SQL_USER`, `SQL_PASSWORD` | Database connection used by the app |
+| `SQL_ADMIN_USER`, `SQL_ADMIN_PASSWORD` | Used by Drizzle (`src/db/drizzle.config.ts`) for schema changes |
+
+## Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Express + Vite dev server |
+| `npm run build` | Builds the frontend into `dist/` and bundles the server into `dist/server.cjs` |
+| `npm start` | Runs the production build |
+| `npm run lint` | Type-checks the project |
+
+## Status
+
+This is a demo: the rooms, services and reviews are sample content. It needs a Node host with a Postgres database (it is not a static site), and it hasn't been deployed yet.
