@@ -39,4 +39,4 @@ On startup, the server creates sample data (rooms, services, gallery) if the dat
 
 ## Status
 
-This is a demo: the rooms, services and reviews are sample content. It needs a Node host with a Postgres database (it is not a static site), and it hasn't been deployed yet.
+This is a demo: the rooms, services and reviews are sample content. The Vercel project only serves the built frontend. The Express API in `server.ts` (bookings, guest portal, staff dashboard) needs a Node host with a Postgres database, and that part isn't deployed yet.
