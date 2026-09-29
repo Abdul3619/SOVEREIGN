@@ -4,8 +4,12 @@ import * as schema from './schema.ts';
 
 const { Pool } = PoolPkg;
 
-// Function to create a new connection pool.
+// Function to create a new connection pool. DATABASE_URL (a single connection string, as Render and most hosts
+// provide) takes precedence over the separate SQL_* variables.
 export const createPool = () => {
+  if (process.env.DATABASE_URL) {
+    return new Pool({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 15000 });
+  }
   return new Pool({
     host: process.env.SQL_HOST,
     user: process.env.SQL_USER,

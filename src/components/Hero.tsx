@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Award, Compass, ShieldCheck } from 'lucide-react';
+import IllustrativeBadge from './IllustrativeBadge';
 
 interface HeroProps {
   title: string;
@@ -41,6 +42,8 @@ export const Hero: React.FC<HeroProps> = ({ title, subtitle, onBookClick, setVie
             Voted Top 10 Luxury Hotels Globally
           </span>
         </motion.div>
+        {/* The award above is invented for this demo hotel */}
+        <p className="-mt-3 mb-6 text-[#c5a880]"><IllustrativeBadge /></p>
 
         {/* Hero Title */}
         <motion.h1

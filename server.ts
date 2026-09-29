@@ -12,7 +12,8 @@ import { eq, and, desc, sql, like, or } from 'drizzle-orm';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  // Hosts such as Render set PORT; 3000 is the local default.
+  const PORT = Number(process.env.PORT) || 3000;
 
   // Increase JSON payload limit for base64 file uploads (receipts, room photos)
   app.use(express.json({ limit: '10mb' }));
@@ -41,8 +42,10 @@ async function startServer() {
       address: '100 Sovereign Promenade, Cliffside Riviera, CR 8052',
       phone: '+1 (800) 555-GOLD',
       whatsapp: '+447700900077',
-      email: 'reservations@sovereigngrand.com',
-      googleMapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6175394747067!2d-73.9854284!3d40.7484405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2suk!4v1655115255471!5m2!1sen!2suk'
+      // Demo hotel: fictional contact details (.example domains can never be registered, 555 and 07700 900xxx
+      // numbers are reserved for fiction). No map, because any real location would be misleading.
+      email: 'reservations@sovereigngrand.example',
+      googleMapEmbed: ''
     }
   };
 

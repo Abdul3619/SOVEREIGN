@@ -59,7 +59,9 @@ export const ServicesView: React.FC = () => {
         </motion.div>
 
         {loading ? (
-          <div className="text-center text-gray-500 font-mono text-xs">Loading premium guest features...</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="status" aria-label="Loading services">
+            {[0, 1, 2].map((i) => <div key={i} className="skeleton h-72 rounded-2xl" />)}
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicesList.map((srv, idx) => (
@@ -161,7 +163,9 @@ export const GalleryView: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="text-center text-gray-500 font-mono text-xs">Loading visual portfolio...</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="status" aria-label="Loading gallery">
+            {[0, 1, 2, 3, 4, 5].map((i) => <div key={i} className="skeleton aspect-[4/3] rounded-2xl" />)}
+          </div>
         ) : (
           <motion.div 
             layout
@@ -435,8 +439,8 @@ export const ContactView: React.FC<ContactProps> = ({ cms }) => {
           </div>
         </div>
 
-        {/* Google Maps Integration iframe */}
-        <div className="mt-16 border-t border-[#2d3139]/20 pt-16">
+        {/* Google Maps Integration iframe (only when a map embed is configured in the CMS) */}
+        {cms.contactInfo.googleMapEmbed && <div className="mt-16 border-t border-[#2d3139]/20 pt-16">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#c5a880] block mb-4 text-center">Interactive Estate Coordinates</span>
           <div className="h-96 rounded-2xl overflow-hidden border border-[#2d3139]/40">
             <iframe 
@@ -450,7 +454,7 @@ export const ContactView: React.FC<ContactProps> = ({ cms }) => {
               title="Google Map of Sovereign Grand Hotel"
             />
           </div>
-        </div>
+        </div>}
 
       </div>
     </div>
