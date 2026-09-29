@@ -39,7 +39,7 @@ On startup, the server creates sample data (rooms, services, gallery) if the dat
 
 ## Status
 
-This is a demo: the rooms, services and reviews are sample content. The Vercel project only serves the built frontend. The Express API in `server.ts` (bookings, guest portal, staff dashboard) needs a Node host with a Postgres database, and that part isn't deployed yet.
+This is a demo: the rooms, services and reviews are sample content. Vercel serves the frontend and forwards `/api/*` to the Express API on Render (`https://sovereign-api-5kr8.onrender.com`), which uses a Render Postgres database. The free Render database expires 30 days after creation (29 October 2026) unless upgraded, and the free web service sleeps when idle, so the first request after a while takes up to a minute.
 
 ## Deploying the API on Render
 
