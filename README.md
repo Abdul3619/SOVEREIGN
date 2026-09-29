@@ -40,3 +40,16 @@ On startup, the server creates sample data (rooms, services, gallery) if the dat
 ## Status
 
 This is a demo: the rooms, services and reviews are sample content. The Vercel project only serves the built frontend. The Express API in `server.ts` (bookings, guest portal, staff dashboard) needs a Node host with a Postgres database, and that part isn't deployed yet.
+
+## Deploying the API on Render
+
+The Render web service runs `npm install && npm run build` and starts with `npm run start:render`
+(`scripts/render-start.sh`). That script creates the database tables with `drizzle-kit push` when a database is
+configured, then starts the server, which seeds sample data into empty tables.
+
+Set `DATABASE_URL` on the service to the Postgres **Internal Database URL** (Render dashboard → the database →
+Connect). The separate `SQL_*` variables still work if you prefer them.
+
+Google sign-in: the Vercel frontend forwards `/api/*` to the Render service (see `vercel.json`), so sign-in keeps
+working on the Vercel domain. To sign in on the Render URL directly, add it to Firebase → Authentication →
+Authorized domains.
