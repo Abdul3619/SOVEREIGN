@@ -134,9 +134,10 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0c10] flex flex-col items-center justify-center text-xs font-mono text-gray-500 gap-3">
-        <Sparkles className="h-6 w-6 text-[#c5a880] animate-pulse" />
-        SOCIÉTÉ HÔTELIÈRE SOVEREIGN...
+      <div className="min-h-screen bg-[#0a0c10] flex flex-col items-center justify-center gap-6 px-6" role="status" aria-label="Loading">
+        <Sparkles className="h-6 w-6 text-[#c5a880] animate-pulse motion-reduce:animate-none" aria-hidden="true" />
+        <div className="skeleton h-4 w-64 max-w-full" />
+        <div className="skeleton h-3 w-48 max-w-full" />
       </div>
     );
   }
